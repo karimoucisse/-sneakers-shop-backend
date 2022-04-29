@@ -1,15 +1,20 @@
 const mongoose = require('mongoose')
 
+
 const ProductSchema = mongoose.Schema({
     name: {type: String, required: true},
-    image: {type: String, required: true},
-    color: [{type: String, required: true}],
-    brand: {type: String, required: true},
-    size: [{type: String, required: true}],
     price: {type: Number, required: true},
-    description: {type: String},
+    brand: {type: String, required: true},
+    size: [{type: Number, required: true}],
+    color: {type: String, required: true},
+    image : {type: String, required: true},
+    description: {type: String, required: true},
+    reviews: [ReviewSchema],
+    rating: {type: Number, required: true, default: 0},
+    // numReviews: {type: Number, required: true, default: 0},
+    inStock: {type: Number, required: true, default: 0},
     available: {type: Boolean, default: true},
-    categories : [{ type: Schema.Types.ObjectId, ref: "Category"}]
+    categories : {type: Array}
 },{
     timestamps: true
 }) 
