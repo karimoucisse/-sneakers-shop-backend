@@ -4,6 +4,7 @@ const User = require('../models/User')
 const bcrypt = require('bcrypt')
 const passport = require('../config/passport')
 
+// ALLOW USER TO SIGNUP
 app.post("/signup", (req, res) => {
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
@@ -21,6 +22,7 @@ app.post("/signup", (req, res) => {
         .catch(error => res.status(500).json({ error }))
 })
 
+// ALLOW USER TO LOGIN
 app.post("/login", passport.authenticate("local"), (req, res) => {
     if (req.user) {
         req.logIn(req.user, async err => {
@@ -35,6 +37,13 @@ app.post("/login", passport.authenticate("local"), (req, res) => {
         })
     }
     
+})
+
+// ALLOW USER TO LOGOUT
+app.delete("/logout", async (req, res) => {
+    req.session.destroy()
+    req.logout()
+    res.status(200).json({ message: "Success, user is logout" })
 })
 
 

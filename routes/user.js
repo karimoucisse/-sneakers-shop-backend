@@ -3,6 +3,7 @@ const app = express()
 const Users = require('../models/User')
 const bcrypt = require('bcrypt')
 
+//GET ALL USER
 app.get('/', async (req,res) => {
     try {
         const users = await Users.find()
@@ -14,6 +15,7 @@ app.get('/', async (req,res) => {
     }
 })
 
+// GET ONE USER BY HIS ID
 app.get('/:id', async (req, res) => {
     const {id} = req.params
     try {
@@ -27,6 +29,7 @@ app.get('/:id', async (req, res) => {
 
 })
 
+// MODIFY ONE USER INFORMATION 
 app.put('/:id', async (req, res) => {
     const {id} = req.params
     try {
