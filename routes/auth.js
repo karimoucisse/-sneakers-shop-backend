@@ -23,7 +23,7 @@ app.post("/signup", (req, res) => {
 })
 
 // ALLOW USER TO LOGIN
-app.post("/login", passport.authenticate("local"), (req, res) => {
+app.post("/login",  passport.authenticate("local"), (req, res) => {
     if (req.user) {
         req.logIn(req.user, async err => {
             if(err) {

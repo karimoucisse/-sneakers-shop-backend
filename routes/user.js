@@ -11,7 +11,7 @@ app.get('/', async (req,res) => {
         res.json(users)
     } catch (err) {
         console.log(err)
-        res.status(500).json({ error })
+        res.status(500).json(err)
     }
 })
 
@@ -24,7 +24,7 @@ app.get('/:id', async (req, res) => {
         res.json(user)
     } catch (err) {
         console.log(err)
-        res.status(500).json({ error })
+        res.status(500).json(err)
     }
 
 })

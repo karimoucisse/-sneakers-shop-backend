@@ -3,13 +3,22 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 5000
 const mongoose = require('mongoose')
-const passport = require('passport')
+const passport = require('./config/passport')
 const cors = require('cors')
 // const passport = require('./config/passport')
 const expressSession = require('express-session')
 
-const auth = require('./routes/auth')
-const user = require('./routes/user')
+// require("./models/Cart")
+// require("./models/Order")
+// require("./models/Product")
+// require("./models/User")
+
+
+const authRoute = require('./routes/auth')
+const userRoute = require('./routes/user')
+const productsRoute = require('./routes/products')
+const cartRoute = require('./routes/cart')
+const orderRoute = require('./routes/order')
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connection to MongoDB successful !'))
@@ -30,8 +39,11 @@ app.use(expressSession({
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use('/auth', auth)
-app.use('/user', user)
+app.use('/auth', authRoute)
+app.use('/user', userRoute)
+app.use('/products', productsRoute)
+app.use('/cart', cartRoute)
+app.use('/order', orderRoute)
 
 app.listen(port, () => {
     console.log(`Serveur is running on port ${port}`);
